@@ -9,29 +9,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com">
-    </script>
 
     <style>
-        /* ─── ROOT VARIABLES ─── */
+        /* ═══════════════════════════════════════ */
+        /* ROOT VARIABLES                         */
+        /* ═══════════════════════════════════════ */
         :root {
             --bg-primary: #070B18;
             --bg-secondary: #111827;
             --bg-card: #151A2D;
             --color-primary: #7C3AED;
+            --color-primary-light: #8B5CF6;
             --color-secondary: #3B82F6;
             --color-success: #10B981;
             --color-warning: #F59E0B;
             --color-danger: #EF4444;
             --text-primary: #FFFFFF;
             --text-secondary: #94A3B8;
+            --text-muted: #64748B;
             --border-color: rgba(255, 255, 255, 0.08);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
             --radius: 18px;
+            --radius-sm: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* ─── RESET & BASE ─── */
+        /* ═══════════════════════════════════════ */
+        /* RESET & BASE                           */
+        /* ═══════════════════════════════════════ */
         * {
             margin: 0;
             padding: 0;
@@ -46,7 +51,13 @@
             overflow-x: hidden;
         }
 
-        /* ─── SCROLLBAR ─── */
+        .font-space {
+            font-family: 'Space Grotesk', monospace;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* SCROLLBAR                              */
+        /* ═══════════════════════════════════════ */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -58,11 +69,9 @@
             border-radius: 12px;
         }
 
-        /* ─── UTILITY ─── */
-        .font-space {
-            font-family: 'Space Grotesk', monospace;
-        }
-
+        /* ═══════════════════════════════════════ */
+        /* UTILITY CLASSES                        */
+        /* ═══════════════════════════════════════ */
         .gradient-text {
             background: linear-gradient(135deg, var(--color-secondary), var(--color-primary), #A855F7);
             -webkit-background-clip: text;
@@ -81,11 +90,17 @@
             background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
         }
 
+        .bg-gradient-success {
+            background: linear-gradient(135deg, var(--color-success), #059669);
+        }
+
         .bg-gradient-glow {
             background: radial-gradient(circle at 30% 50%, rgba(124, 58, 237, 0.15), transparent 70%);
         }
 
-        /* ─── GLASSMORPHISM ─── */
+        /* ═══════════════════════════════════════ */
+        /* GLASSMORPHISM                          */
+        /* ═══════════════════════════════════════ */
         .glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(16px);
@@ -100,17 +115,32 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all var(--transition);
             box-shadow: var(--shadow-card);
         }
 
         .glass-card:hover {
-            border-color: rgba(124, 58, 237, 0.3);
+            border-color: rgba(124, 58, 237, 0.25);
             transform: translateY(-2px);
-            box-shadow: 0 12px 48px rgba(124, 58, 237, 0.15);
+            box-shadow: 0 12px 48px rgba(124, 58, 237, 0.12);
         }
 
-        /* ─── BUTTONS ─── */
+        .glass-card-sm {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+        }
+
+        .glass-card-sm:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* BUTTONS                                */
+        /* ═══════════════════════════════════════ */
         .btn-primary {
             background: linear-gradient(135deg, var(--color-primary), #6D28D9);
             color: #fff;
@@ -119,17 +149,24 @@
             border-radius: 9999px;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition);
             box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
             box-shadow: 0 8px 32px rgba(124, 58, 237, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
         }
 
         .btn-secondary {
@@ -140,11 +177,12 @@
             border-radius: 9999px;
             border: 1px solid var(--border-color);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-secondary:hover {
@@ -160,20 +198,66 @@
             border-radius: 9999px;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all var(--transition);
             box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-success:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
             box-shadow: 0 8px 32px rgba(16, 185, 129, 0.45);
         }
 
-        /* ─── BADGE ─── */
+        .btn-danger {
+            background: linear-gradient(135deg, var(--color-danger), #DC2626);
+            color: #fff;
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-danger:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.45);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0.6rem 1.2rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* BADGES                                 */
+        /* ═══════════════════════════════════════ */
         .badge {
             display: inline-flex;
             align-items: center;
@@ -184,6 +268,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.03em;
+            font-family: 'Inter', sans-serif;
         }
 
         .badge-open {
@@ -196,7 +281,7 @@
             color: var(--color-danger);
             border: 1px solid rgba(239, 68, 68, 0.2);
         }
-        .badge-in-progress {
+        .badge-inprogress {
             background: rgba(245, 158, 11, 0.15);
             color: var(--color-warning);
             border: 1px solid rgba(245, 158, 11, 0.2);
@@ -206,23 +291,59 @@
             color: var(--color-secondary);
             border: 1px solid rgba(59, 130, 246, 0.2);
         }
+        .badge-paid {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--color-success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .badge-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--color-warning);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
 
-        /* ─── SIDEBAR ─── */
+        /* ═══════════════════════════════════════ */
+        /* SIDEBAR                                */
+        /* ═══════════════════════════════════════ */
+        .sidebar {
+            width: 72px;
+            min-height: 100vh;
+            border-right: 1px solid var(--border-color);
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 0.75rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 40;
+            background: var(--bg-primary);
+            transition: width var(--transition);
+        }
+
+        .sidebar-expanded {
+            width: 220px;
+        }
+
         .sidebar-item {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.6rem 1rem;
-            border-radius: 12px;
+            padding: 0.6rem 0.75rem;
+            border-radius: var(--radius-sm);
             color: var(--text-secondary);
-            transition: all 0.2s ease;
+            transition: all var(--transition);
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 500;
-            text-decoration: none;
             width: 100%;
             border: none;
             background: transparent;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
         .sidebar-item:hover {
@@ -237,12 +358,109 @@
         }
 
         .sidebar-item i {
-            width: 20px;
+            width: 22px;
             text-align: center;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            flex-shrink: 0;
         }
 
-        /* ─── ANIMATIONS ─── */
+        .sidebar-item .label {
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+
+        .sidebar-expanded .sidebar-item .label {
+            opacity: 1;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0 0.75rem;
+            margin-bottom: 1.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .sidebar-brand .brand-text {
+            opacity: 0;
+            transition: opacity var(--transition);
+            font-size: 1.1rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .sidebar-expanded .sidebar-brand .brand-text {
+            opacity: 1;
+        }
+
+        .sidebar-brand .brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .sidebar-user {
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.75rem;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+        }
+
+        .sidebar-user .user-info {
+            opacity: 0;
+            transition: opacity var(--transition);
+            white-space: nowrap;
+        }
+
+        .sidebar-expanded .sidebar-user .user-info {
+            opacity: 1;
+        }
+
+        .sidebar-user .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* MAIN CONTENT                           */
+        /* ═══════════════════════════════════════ */
+        .main-content {
+            flex: 1;
+            padding: 1.5rem 2rem 6rem 2rem;
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+
+        .page {
+            display: none;
+            animation: fadeUp 0.4s ease forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -251,26 +469,6 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0%,
-            100% {
-                opacity: 0.4;
-            }
-            50% {
-                opacity: 0.8;
             }
         }
 
@@ -285,119 +483,180 @@
             }
         }
 
-        @keyframes countUp {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                opacity: 0.3;
             }
-            to {
-                opacity: 1;
-                transform: scale(1);
+            50% {
+                opacity: 0.7;
             }
-        }
-
-        .animate-fadeUp {
-            animation: fadeUp 0.6s ease forwards;
-        }
-
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
         }
 
         .animate-slideIn {
             animation: slideIn 0.5s ease forwards;
         }
 
-        .animate-pulseGlow {
-            animation: pulseGlow 3s ease-in-out infinite;
-        }
-
-        /* ─── FLOATING ORBS ─── */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            pointer-events: none;
-            filter: blur(80px);
-            z-index: 0;
-            opacity: 0.3;
-        }
-
-        /* ─── SCORE CIRCLE ─── */
-        .score-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
+        /* ═══════════════════════════════════════ */
+        /* LOGIN PAGE                             */
+        /* ═══════════════════════════════════════ */
+        #login-page {
+            display: none;
+            min-height: 100vh;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            font-family: 'Space Grotesk', monospace;
+            padding: 1.5rem;
+            background: var(--bg-primary);
             position: relative;
         }
 
-        .score-circle::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
+        #login-page.show {
+            display: flex;
+        }
+
+        .login-orb {
+            position: fixed;
             border-radius: 50%;
-            padding: 2px;
-            background: conic-gradient(var(--color-primary) var(--score, 0%), rgba(255, 255, 255, 0.1) var(--score, 0%));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            pointer-events: none;
+            filter: blur(100px);
+            z-index: 0;
         }
 
-        /* ─── RESPONSIVE ─── */
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                flex-direction: row !important;
-                overflow-x: auto;
-                background: var(--bg-primary);
-                border-top: 1px solid var(--border-color);
-                padding: 0.5rem 0.75rem;
-                z-index: 50;
-                height: auto;
-                width: 100% !important;
-                border-right: none !important;
-            }
-            .sidebar-item {
-                flex-direction: column;
-                padding: 0.4rem 0.6rem;
-                font-size: 0.6rem;
-                gap: 0.2rem;
-                min-width: 56px;
-            }
-            .sidebar-item i {
-                font-size: 1.1rem;
-            }
-            .sidebar-item span {
-                display: block;
-            }
-            .main-content {
-                margin-left: 0 !important;
-                padding-bottom: 80px !important;
-            }
-            .hide-mobile {
-                display: none !important;
-            }
+        .login-box {
+            max-width: 420px;
+            width: 100%;
+            padding: 2.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-card);
+            position: relative;
+            z-index: 1;
+            animation: fadeUp 0.5s ease forwards;
         }
 
-        /* ─── PAGE TRANSITIONS ─── */
-        .page {
+        .login-box .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .login-box .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .login-box .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .login-box .form-group input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color var(--transition);
+            outline: none;
+        }
+
+        .login-box .form-group input:focus {
+            border-color: var(--color-primary);
+        }
+
+        .login-box .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .login-box .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .login-box .divider::before,
+        .login-box .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .login-box .social-btn {
+            width: 100%;
+            padding: 0.7rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .login-box .social-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .login-box .register-link {
+            text-align: center;
+            margin-top: 1.25rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .login-box .register-link a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-box .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .login-error {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #FCA5A5;
+            padding: 0.7rem 1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
             display: none;
-            animation: fadeUp 0.4s ease forwards;
+            margin-bottom: 1rem;
         }
 
-        .page.active {
+        .login-error.show {
             display: block;
         }
 
-        /* ─── TABLE ─── */
+        /* ═══════════════════════════════════════ */
+        /* TABLE                                  */
+        /* ═══════════════════════════════════════ */
         .table-wrap {
             overflow-x: auto;
         }
@@ -429,714 +688,925 @@
             background: rgba(255, 255, 255, 0.02);
         }
 
-        /* ─── MISC ─── */
-        .truncate {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        /* ═══════════════════════════════════════ */
+        /* FLOATING ORBS                          */
+        /* ═══════════════════════════════════════ */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.25;
         }
 
-        .transition-smooth {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ═══════════════════════════════════════ */
+        /* RESPONSIVE                             */
+        /* ═══════════════════════════════════════ */
+        .sidebar-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                flex-direction: row !important;
+                overflow-x: auto;
+                background: var(--bg-primary);
+                border-top: 1px solid var(--border-color);
+                padding: 0.4rem 0.6rem;
+                z-index: 50;
+                height: auto;
+                width: 100% !important;
+                border-right: none !important;
+                min-height: auto;
+                top: auto;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                background: rgba(7, 11, 24, 0.95);
+            }
+
+            .sidebar-brand,
+            .sidebar-user {
+                display: none !important;
+            }
+
+            .sidebar-item {
+                flex-direction: column;
+                padding: 0.4rem 0.5rem;
+                font-size: 0.6rem;
+                gap: 0.15rem;
+                min-width: 52px;
+                white-space: nowrap;
+            }
+
+            .sidebar-item i {
+                font-size: 1rem;
+                width: auto;
+            }
+
+            .sidebar-item .label {
+                opacity: 1 !important;
+                font-size: 0.55rem;
+            }
+
+            .sidebar-item.active {
+                box-shadow: inset 0 -3px 0 var(--color-primary);
+            }
+
+            .main-content {
+                padding: 1rem 1rem 5rem 1rem;
+            }
+
+            .hide-mobile {
+                display: none !important;
+            }
+
+            .login-box {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .main-content {
+                padding: 0.75rem 0.75rem 5rem 0.75rem;
+            }
+            .glass-card {
+                padding: 1rem !important;
+            }
+            .stat-number {
+                font-size: 1.4rem !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* SCORE CIRCLE                           */
+        /* ═══════════════════════════════════════ */
+        .score-circle {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Space Grotesk', monospace;
+            position: relative;
+            background: conic-gradient(var(--color-primary) var(--score, 0%), rgba(255, 255, 255, 0.06) var(--score, 0%));
+        }
+
+        .score-circle .inner {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* TOAST NOTIFICATION                     */
+        /* ═══════════════════════════════════════ */
+        .toast-container {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 380px;
+        }
+
+        .toast {
+            padding: 0.9rem 1.2rem;
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            animation: slideIn 0.3s ease forwards;
+            color: var(--text-primary);
+        }
+
+        .toast.success {
+            border-left: 3px solid var(--color-success);
+        }
+
+        .toast.error {
+            border-left: 3px solid var(--color-danger);
+        }
+
+        .toast.info {
+            border-left: 3px solid var(--color-secondary);
+        }
+
+        .toast .toast-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .toast.success .toast-icon {
+            color: var(--color-success);
+        }
+        .toast.error .toast-icon {
+            color: var(--color-danger);
+        }
+        .toast.info .toast-icon {
+            color: var(--color-secondary);
+        }
+
+        .toast .toast-close {
+            margin-left: auto;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0 0.25rem;
+        }
+
+        .toast .toast-close:hover {
+            color: var(--text-primary);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- ─── FLOATING ORBS ─── -->
-    <div class="orb" style="width:400px;height:400px;background:var(--color-primary);top:-100px;right:-100px;"></div>
-    <div class="orb" style="width:300px;height:300px;background:var(--color-secondary);bottom:-80px;left:-80px;"></div>
-    <div class="orb" style="width:200px;height:200px;background:#A855F7;top:40%;right:5%;"></div>
+    <!-- ════════════════════════════════════════ -->
+    <!-- LOGIN PAGE                              -->
+    <!-- ════════════════════════════════════════ -->
+    <div id="login-page" class="show">
+        <!-- Orbs -->
+        <div class="login-orb" style="width:300px;height:300px;background:var(--color-primary);top:-60px;right:-60px;"></div>
+        <div class="login-orb" style="width:250px;height:250px;background:var(--color-secondary);bottom:-40px;left:-40px;"></div>
 
-    <!-- ─── APP CONTAINER ─── -->
-    <div id="app" class="relative z-10 min-h-screen flex">
+        <div class="login-box">
+            <div class="logo gradient-text">⌘ CodeBounty AI</div>
+            <p class="subtitle">AI-Powered Open Source Collaboration Platform</p>
 
-        <!-- ═══ SIDEBAR ═══ -->
-        <aside class="sidebar glass w-[72px] lg:w-[220px] min-h-screen border-r border-[var(--border-color)] flex-shrink-0 flex flex-col p-3 lg:p-4 sticky top-0 h-screen overflow-y-auto">
-            <!-- Logo -->
-            <div class="flex items-center gap-2 mb-6 lg:mb-8 px-2">
-                <div class="w-8 h-8 rounded-xl bg-gradient-primary flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                    <i class="fa-solid fa-code"></i>
-                </div>
-                <span class="hidden lg:block text-lg font-bold gradient-text">CodeBounty</span>
+            <div id="loginError" class="login-error">
+                <i class="fa-solid fa-triangle-exclamation"></i> Invalid email or password.
             </div>
 
-            <!-- Navigation -->
-            <nav class="flex-1 space-y-0.5">
-                <button class="sidebar-item active" data-page="dashboard"><i class="fa-solid fa-gauge-high"></i><span class="hidden lg:inline">Dashboard</span></button>
-                <button class="sidebar-item" data-page="repositories"><i class="fa-solid fa-repo"></i><span class="hidden lg:inline">Repositories</span></button>
-                <button class="sidebar-item" data-page="ai-generator"><i class="fa-solid fa-wand-magic-sparkles"></i><span class="hidden lg:inline">AI Generator</span></button>
-                <button class="sidebar-item" data-page="bounties"><i class="fa-solid fa-tags"></i><span class="hidden lg:inline">Bounties</span></button>
-                <button class="sidebar-item" data-page="payments"><i class="fa-solid fa-credit-card"></i><span class="hidden lg:inline">Payments</span></button>
-                <button class="sidebar-item" data-page="wallet"><i class="fa-solid fa-wallet"></i><span class="hidden lg:inline">Wallet</span></button>
-                <button class="sidebar-item" data-page="leaderboard"><i class="fa-solid fa-trophy"></i><span class="hidden lg:inline">Leaderboard</span></button>
-                <button class="sidebar-item" data-page="analytics"><i class="fa-solid fa-chart-bar"></i><span class="hidden lg:inline">Analytics</span></button>
-                <button class="sidebar-item" data-page="settings"><i class="fa-solid fa-gear"></i><span class="hidden lg:inline">Settings</span></button>
-            </nav>
-
-            <!-- User -->
-            <div class="border-t border-[var(--border-color)] pt-3 lg:pt-4 mt-2">
-                <div class="flex items-center gap-2 px-2">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-[var(--color-primary)] to-[var(--color-secondary)] flex items-center justify-center text-white font-bold text-xs flex-shrink-0">JD</div>
-                    <div class="hidden lg:block">
-                        <div class="text-sm font-medium">John Doe</div>
-                        <div class="text-xs text-[var(--text-secondary)]">Developer</div>
-                    </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="you@example.com" value="demo@codebounty.ai" required />
                 </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" value="password123" required />
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:0.8rem;">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+                </button>
+            </form>
+
+            <div class="divider">or continue with</div>
+
+            <button class="social-btn" onclick="socialLogin('github')">
+                <i class="fa-brands fa-github"></i> GitHub
+            </button>
+            <button class="social-btn" style="margin-top:0.5rem;" onclick="socialLogin('google')">
+                <i class="fa-brands fa-google"></i> Google
+            </button>
+
+            <div class="register-link">
+                Don't have an account? <a href="#" onclick="showToast('Registration coming soon!','info')">Sign up</a>
             </div>
-        </aside>
 
-        <!-- ═══ MAIN CONTENT ═══ -->
-        <main class="flex-1 p-4 lg:p-8 main-content overflow-y-auto min-h-screen">
-
-            <!-- ─── PAGE: DASHBOARD ─── -->
-            <section id="page-dashboard" class="page active">
-                <!-- Header -->
-                <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-                    <div>
-                        <h1 class="text-2xl lg:text-3xl font-bold">Dashboard</h1>
-                        <p class="text-[var(--text-secondary)] text-sm mt-0.5">Welcome back, John! Here's what's happening.</p>
-                    </div>
-                    <button class="btn-primary"><i class="fa-solid fa-plus"></i> New Bounty</button>
-                </div>
-
-                <!-- Stats -->
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    <div class="glass-card p-4 lg:p-5">
-                        <div class="text-sm text-[var(--text-secondary)]">Wallet Balance</div>
-                        <div class="text-2xl lg:text-3xl font-bold font-space mt-1">1,250 <span class="text-sm font-medium text-[var(--text-secondary)]">NIM</span></div>
-                        <div class="text-xs text-[var(--color-success)] mt-1"><i class="fa-solid fa-arrow-up"></i> +12.5% this week</div>
-                    </div>
-                    <div class="glass-card p-4 lg:p-5">
-                        <div class="text-sm text-[var(--text-secondary)]">Total Earnings</div>
-                        <div class="text-2xl lg:text-3xl font-bold font-space mt-1">$320.50</div>
-                        <div class="text-xs text-[var(--color-success)] mt-1"><i class="fa-solid fa-arrow-up"></i> +8.2% this month</div>
-                    </div>
-                    <div class="glass-card p-4 lg:p-5">
-                        <div class="text-sm text-[var(--text-secondary)]">Open Bounties</div>
-                        <div class="text-2xl lg:text-3xl font-bold font-space mt-1">12</div>
-                        <div class="text-xs text-[var(--text-secondary)] mt-1">4 assigned to you</div>
-                    </div>
-                    <div class="glass-card p-4 lg:p-5">
-                        <div class="text-sm text-[var(--text-secondary)]">AI Health Score</div>
-                        <div class="text-2xl lg:text-3xl font-bold font-space mt-1 text-[var(--color-success)]">92%</div>
-                        <div class="text-xs text-[var(--text-secondary)] mt-1">Excellent</div>
-                    </div>
-                </div>
-
-                <!-- Two columns -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Recent Activity -->
-                    <div class="glass-card p-5">
-                        <h3 class="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-4">Recent Activity</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-start gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 flex-shrink-0"><i class="fa-solid fa-check"></i></div>
-                                <div>
-                                    <div class="text-sm">PR #512 merged — <span class="text-[var(--color-success)]">+75 NIM</span></div>
-                                    <div class="text-xs text-[var(--text-secondary)]">2 hours ago</div>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 flex-shrink-0"><i class="fa-solid fa-code-fork"></i></div>
-                                <div>
-                                    <div class="text-sm">New PR #514 — <span class="text-blue-400">AI Review</span></div>
-                                    <div class="text-xs text-[var(--text-secondary)]">5 hours ago</div>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 flex-shrink-0"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                                <div>
-                                    <div class="text-sm">AI generated 3 new bounties</div>
-                                    <div class="text-xs text-[var(--text-secondary)]">1 day ago</div>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <div class="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400 flex-shrink-0"><i class="fa-solid fa-coins"></i></div>
-                                <div>
-                                    <div class="text-sm">Payment received — <span class="text-[var(--color-success)]">+50 NIM</span></div>
-                                    <div class="text-xs text-[var(--text-secondary)]">2 days ago</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- AI Insights Panel -->
-                    <div class="glass-card p-5">
-                        <h3 class="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-4">AI Insights</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <div class="flex justify-between text-sm"><span>Repository Health</span><span class="text-[var(--color-success)]">89%</span></div>
-                                <div class="w-full h-1.5 bg-white/5 rounded-full mt-1 overflow-hidden"><div class="h-full bg-[var(--color-success)] rounded-full" style="width:89%"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm"><span>Technical Debt</span><span class="text-[var(--color-warning)]">Low</span></div>
-                                <div class="w-full h-1.5 bg-white/5 rounded-full mt-1 overflow-hidden"><div class="h-full bg-[var(--color-warning)] rounded-full" style="width:25%"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm"><span>Security Risk</span><span class="text-[var(--color-success)]">Low</span></div>
-                                <div class="w-full h-1.5 bg-white/5 rounded-full mt-1 overflow-hidden"><div class="h-full bg-[var(--color-success)] rounded-full" style="width:15%"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm"><span>Code Quality</span><span class="text-[var(--color-success)]">94%</span></div>
-                                <div class="w-full h-1.5 bg-white/5 rounded-full mt-1 overflow-hidden"><div class="h-full bg-[var(--color-success)] rounded-full" style="width:94%"></div></div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm"><span>Test Coverage</span><span class="text-[var(--color-warning)]">72%</span></div>
-                                <div class="w-full h-1.5 bg-white/5 rounded-full mt-1 overflow-hidden"><div class="h-full bg-[var(--color-warning)] rounded-full" style="width:72%"></div></div>
-                            </div>
-                        </div>
-                        <div class="mt-4 p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-300 flex items-center gap-2">
-                            <i class="fa-solid fa-lightbulb"></i> AI suggests improving test coverage for auth module.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Repositories Overview -->
-                <div class="glass-card p-5 mt-6">
-                    <h3 class="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-4">Repository Overview</h3>
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr><th>Repository</th><th class="hide-mobile">Language</th><th>Stars</th><th>Forks</th><th class="hide-mobile">Issues</th><th>AI Health</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="font-medium">nimiq-explorer</td><td class="hide-mobile">TypeScript</td><td>1.2k</td><td>89</td><td class="hide-mobile">23</td><td><span class="text-[var(--color-success)]">92%</span></td></tr>
-                                <tr><td class="font-medium">nimiq-wallet</td><td class="hide-mobile">JavaScript</td><td>856</td><td>64</td><td class="hide-mobile">17</td><td><span class="text-[var(--color-success)]">88%</span></td></tr>
-                                <tr><td class="font-medium">nimiq-core</td><td class="hide-mobile">Rust</td><td>2.1k</td><td>156</td><td class="hide-mobile">41</td><td><span class="text-[var(--color-warning)]">76%</span></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ─── PAGE: REPOSITORIES ─── -->
-            <section id="page-repositories" class="page">
-                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-                    <h1 class="text-2xl lg:text-3xl font-bold">Repositories</h1>
-                    <button class="btn-primary"><i class="fa-solid fa-plus"></i> Import Repository</button>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="glass-card p-5 hover:border-[var(--color-primary)]/30 transition">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <div class="font-semibold flex items-center gap-2"><i class="fa-brands fa-github text-[var(--text-secondary)]"></i> nimiq-explorer</div>
-                                <div class="text-sm text-[var(--text-secondary)]">nimiq / nimiq-explorer</div>
-                            </div>
-                            <span class="badge badge-open"><i class="fa-regular fa-circle"></i> Active</span>
-                        </div>
-                        <div class="mt-3 flex flex-wrap gap-3 text-xs text-[var(--text-secondary)]">
-                            <span><i class="fa-solid fa-circle text-blue-400"></i> TypeScript</span>
-                            <span><i class="fa-regular fa-star"></i> 1.2k</span>
-                            <span><i class="fa-regular fa-code-fork"></i> 89</span>
-                        </div>
-                        <div class="mt-3 flex gap-2">
-                            <button class="text-xs bg-white/5 px-3 py-1 rounded-full hover:bg-white/10 transition">View</button>
-                            <button class="text-xs bg-white/5 px-3 py-1 rounded-full hover:bg-white/10 transition">Analyze</button>
-                        </div>
-                    </div>
-                    <div class="glass-card p-5 hover:border-[var(--color-primary)]/30 transition">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <div class="font-semibold flex items-center gap-2"><i class="fa-brands fa-github text-[var(--text-secondary)]"></i> nimiq-wallet</div>
-                                <div class="text-sm text-[var(--text-secondary)]">nimiq / nimiq-wallet</div>
-                            </div>
-                            <span class="badge badge-in-progress"><i class="fa-regular fa-clock"></i> Analyzing</span>
-                        </div>
-                        <div class="mt-3 flex flex-wrap gap-3 text-xs text-[var(--text-secondary)]">
-                            <span><i class="fa-solid fa-circle text-yellow-400"></i> JavaScript</span>
-                            <span><i class="fa-regular fa-star"></i> 856</span>
-                            <span><i class="fa-regular fa-code-fork"></i> 64</span>
-                        </div>
-                        <div class="mt-3 flex gap-2">
-                            <button class="text-xs bg-white/5 px-3 py-1 rounded-full hover:bg-white/10 transition">View</button>
-                            <button class="text-xs bg-white/5 px-3 py-1 rounded-full hover:bg-white/10 transition">Analyze</button>
-                        </div>
-                    </div>
-                    <div class="glass-card p-5 hover:border-[var(--color-primary)]/30 transition">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <div class="font-semibold flex items-center gap-2"><i class="fa-brands fa-github text-[var(--text-secondary)]"></i> nimiq-core</div>
-                                <div class="text-sm text-[var(--text-secondary)]">nimiq / nimiq-core</div>
-                            </div>
-                            <span class="badge badge-review"><i class="fa-regular fa-circle-check"></i> Synced</span>
-                        </div>
-                        <div class="mt-3 flex flex-wrap gap-3 text-xs text-[var(--text-secondary)]">
-                            <span><i class="fa-solid fa-circle text-purple-400"></i> Rust</span>
-                            <span><i class="fa-regular fa-star"></i> 2.1k</span>
-                            <span><i class="fa-regular fa-code-fork"></i> 156</span>
-                        </div>
-                        <div class="mt-3 flex gap-2">
-                            <button class="text-xs bg-white/5 px-3 py-1 rounded-full hover:bg-white/10 transition">View</button>
-                            <button class="text-xs bg-white/5 px-3 py-1 rounded-full hover:bg-white/10 transition">Analyze</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ─── PAGE: AI GENERATOR ─── -->
-            <section id="page-ai-generator" class="page">
-                <h1 class="text-2xl lg:text-3xl font-bold mb-2">AI Bounty Generator</h1>
-                <p class="text-[var(--text-secondary)] text-sm mb-6">Analyze repositories and automatically generate bounties with AI.</p>
-
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Main Card -->
-                    <div class="lg:col-span-2 glass-card p-6">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="text-sm text-[var(--text-secondary)] block mb-1">Repository URL</label>
-                                <div class="flex gap-2">
-                                    <input type="text" placeholder="https://github.com/nimiq/nimiq-explorer" class="flex-1 bg-white/5 border border-[var(--border-color)] rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[var(--color-primary)]/50 transition" />
-                                    <button class="btn-primary text-sm"><i class="fa-solid fa-magnifying-glass"></i> Analyze</button>
-                                </div>
-                            </div>
-                            <div class="p-4 rounded-xl bg-white/5 border border-[var(--border-color)]">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400"><i class="fa-solid fa-robot fa-lg"></i></div>
-                                    <div>
-                                        <div class="text-sm font-medium">AI Scan in progress...</div>
-                                        <div class="text-xs text-[var(--text-secondary)]">Analyzing repository structure, dependencies, and issues</div>
-                                    </div>
-                                    <div class="ml-auto text-xs text-[var(--text-secondary)] animate-pulse"><i class="fa-solid fa-spinner fa-spin"></i> 45%</div>
-                                </div>
-                                <div class="w-full h-1 bg-white/5 rounded-full mt-3 overflow-hidden"><div class="h-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full" style="width:45%"></div></div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-3 text-sm">
-                                <div class="p-3 rounded-xl bg-white/5 border border-[var(--border-color)]">
-                                    <div class="text-[var(--text-secondary)]">Repository Health</div>
-                                    <div class="font-semibold text-[var(--color-success)]">89%</div>
-                                </div>
-                                <div class="p-3 rounded-xl bg-white/5 border border-[var(--border-color)]">
-                                    <div class="text-[var(--text-secondary)]">Technical Debt</div>
-                                    <div class="font-semibold text-[var(--color-warning)]">Low</div>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-sm font-medium mb-2">Suggested Bounties</h4>
-                                <div class="space-y-2">
-                                    <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-[var(--border-color)]">
-                                        <div>
-                                            <div class="text-sm font-medium">Fix authentication bug</div>
-                                            <div class="text-xs text-[var(--text-secondary)]">Difficulty: Medium · 8 hrs</div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-sm font-bold text-[var(--color-success)]">50 NIM</div>
-                                            <button class="text-xs text-[var(--color-primary)] hover:underline">Generate</button>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-[var(--border-color)]">
-                                        <div>
-                                            <div class="text-sm font-medium">Add dark mode support</div>
-                                            <div class="text-xs text-[var(--text-secondary)]">Difficulty: Easy · 4 hrs</div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-sm font-bold text-[var(--color-success)]">30 NIM</div>
-                                            <button class="text-xs text-[var(--color-primary)] hover:underline">Generate</button>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-[var(--border-color)]">
-                                        <div>
-                                            <div class="text-sm font-medium">Optimize database queries</div>
-                                            <div class="text-xs text-[var(--text-secondary)]">Difficulty: Hard · 12 hrs</div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="text-sm font-bold text-[var(--color-success)]">80 NIM</div>
-                                            <button class="text-xs text-[var(--color-primary)] hover:underline">Generate</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn-primary w-full justify-center"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate All Bounties</button>
-                        </div>
-                    </div>
-
-                    <!-- Sidebar -->
-                    <div class="space-y-4">
-                        <div class="glass-card p-5">
-                            <h4 class="text-sm font-medium mb-3">Quick Stats</h4>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between"><span class="text-[var(--text-secondary)]">Total Issues</span><span>43</span></div>
-                                <div class="flex justify-between"><span class="text-[var(--text-secondary)]">Open Issues</span><span>12</span></div>
-                                <div class="flex justify-between"><span class="text-[var(--text-secondary)]">AI Bounties</span><span>8</span></div>
-                                <div class="flex justify-between"><span class="text-[var(--text-secondary)]">Total Rewards</span><span class="text-[var(--color-success)]">520 NIM</span></div>
-                            </div>
-                        </div>
-                        <div class="glass-card p-5">
-                            <h4 class="text-sm font-medium mb-3">AI Recommendations</h4>
-                            <div class="space-y-2 text-xs text-[var(--text-secondary)]">
-                                <div class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-[var(--color-success)] mt-0.5"></i> Focus on auth module security</div>
-                                <div class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-[var(--color-success)] mt-0.5"></i> Add unit tests for API</div>
-                                <div class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-[var(--color-success)] mt-0.5"></i> Refactor payment service</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ─── PAGE: BOUNTIES ─── -->
-            <section id="page-bounties" class="page">
-                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-                    <h1 class="text-2xl lg:text-3xl font-bold">Bounty Marketplace</h1>
-                    <button class="btn-primary"><i class="fa-solid fa-plus"></i> New Bounty</button>
-                </div>
-                <div class="glass-card p-0 overflow-hidden">
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr><th>Issue</th><th>Repository</th><th>Difficulty</th><th>Reward</th><th class="hide-mobile">Priority</th><th class="hide-mobile">Deadline</th><th>Status</th><th></th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="font-medium">Fix login bug</td><td>nimiq-explorer</td><td><span class="text-[var(--color-warning)]">Medium</span></td><td class="text-[var(--color-success)] font-bold">100 NIM</td><td class="hide-mobile"><span class="text-red-400">High</span></td><td class="hide-mobile">7 days</td><td><span class="badge badge-open"><i class="fa-regular fa-circle"></i> Open</span></td><td><button class="text-xs bg-[var(--color-primary)]/20 text-[var(--color-primary)] px-3 py-1 rounded-full hover:bg-[var(--color-primary)]/30 transition">Apply</button></td></tr>
-                                <tr><td class="font-medium">Dark mode toggle</td><td>nimiq-wallet</td><td><span class="text-[var(--color-success)]">Easy</span></td><td class="text-[var(--color-success)] font-bold">30 NIM</td><td class="hide-mobile"><span class="text-yellow-400">Medium</span></td><td class="hide-mobile">5 days</td><td><span class="badge badge-open"><i class="fa-regular fa-circle"></i> Open</span></td><td><button class="text-xs bg-[var(--color-primary)]/20 text-[var(--color-primary)] px-3 py-1 rounded-full hover:bg-[var(--color-primary)]/30 transition">Apply</button></td></tr>
-                                <tr><td class="font-medium">Database optimization</td><td>nimiq-core</td><td><span class="text-red-400">Hard</span></td><td class="text-[var(--color-success)] font-bold">80 NIM</td><td class="hide-mobile"><span class="text-red-400">High</span></td><td class="hide-mobile">10 days</td><td><span class="badge badge-in-progress"><i class="fa-regular fa-clock"></i> In Progress</span></td><td><button class="text-xs bg-white/10 text-[var(--text-secondary)] px-3 py-1 rounded-full cursor-not-allowed" disabled>Applied</button></td></tr>
-                                <tr><td class="font-medium">Update README</td><td>nimiq-sdk</td><td><span class="text-[var(--color-success)]">Easy</span></td><td class="text-[var(--color-success)] font-bold">20 NIM</td><td class="hide-mobile"><span class="text-[var(--text-secondary)]">Low</span></td><td class="hide-mobile">3 days</td><td><span class="badge badge-closed"><i class="fa-regular fa-circle-check"></i> Closed</span></td><td><button class="text-xs bg-white/10 text-[var(--text-secondary)] px-3 py-1 rounded-full cursor-not-allowed" disabled>Completed</button></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ─── PAGE: PAYMENTS ─── -->
-            <section id="page-payments" class="page">
-                <h1 class="text-2xl lg:text-3xl font-bold mb-6">Payments</h1>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-                    <div class="glass-card p-4"><div class="text-sm text-[var(--text-secondary)]">Total Paid</div><div class="text-2xl font-bold font-space">1,240 NIM</div></div>
-                    <div class="glass-card p-4"><div class="text-sm text-[var(--text-secondary)]">Pending Escrow</div><div class="text-2xl font-bold font-space text-[var(--color-warning)]">320 NIM</div></div>
-                    <div class="glass-card p-4"><div class="text-sm text-[var(--text-secondary)]">Transactions</div><div class="text-2xl font-bold font-space">47</div></div>
-                </div>
-                <div class="glass-card p-0 overflow-hidden">
-                    <div class="table-wrap">
-                        <table>
-                            <thead><tr><th>ID</th><th>Bounty</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
-                            <tbody>
-                                <tr><td class="text-xs font-mono text-[var(--text-secondary)]">#TX-001</td><td>Fix login bug</td><td class="text-[var(--color-success)] font-bold">+100 NIM</td><td><span class="badge badge-open"><i class="fa-solid fa-check"></i> Completed</span></td><td class="text-xs text-[var(--text-secondary)]">2 hours ago</td></tr>
-                                <tr><td class="text-xs font-mono text-[var(--text-secondary)]">#TX-002</td><td>Dark mode toggle</td><td class="text-[var(--color-success)] font-bold">+30 NIM</td><td><span class="badge badge-open"><i class="fa-solid fa-check"></i> Completed</span></td><td class="text-xs text-[var(--text-secondary)]">1 day ago</td></tr>
-                                <tr><td class="text-xs font-mono text-[var(--text-secondary)]">#TX-003</td><td>Database optimization</td><td class="text-[var(--color-warning)] font-bold">-80 NIM</td><td><span class="badge badge-in-progress"><i class="fa-regular fa-clock"></i> Escrow</span></td><td class="text-xs text-[var(--text-secondary)]">3 days ago</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ─── PAGE: WALLET ─── -->
-            <section id="page-wallet" class="page">
-                <h1 class="text-2xl lg:text-3xl font-bold mb-6">Wallet</h1>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="glass-card p-6">
-                        <div class="text-sm text-[var(--text-secondary)]">Balance</div>
-                        <div class="text-4xl font-bold font-space mt-1">1,250 <span class="text-xl text-[var(--text-secondary)]">NIM</span></div>
-                        <div class="text-sm text-[var(--text-secondary)] mt-1">≈ $320.50 USD</div>
-                        <div class="mt-4 flex gap-3">
-                            <button class="btn-primary text-sm"><i class="fa-solid fa-arrow-up"></i> Send</button>
-                            <button class="btn-secondary text-sm"><i class="fa-solid fa-arrow-down"></i> Receive</button>
-                        </div>
-                        <div class="mt-4 p-3 rounded-xl bg-white/5 border border-[var(--border-color)]">
-                            <div class="text-xs text-[var(--text-secondary)]">Wallet Address</div>
-                            <div class="font-mono text-sm text-white truncate">NQ14 5x6d 7k8j 9n3k 2m4p 8q5r 6t7u 8v9w 0x1y</div>
-                            <button class="text-xs text-[var(--color-primary)] mt-1 hover:underline">Copy</button>
-                        </div>
-                    </div>
-                    <div class="glass-card p-6">
-                        <h4 class="text-sm font-medium mb-4">Recent Transactions</h4>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center p-2 rounded-lg bg-white/5"><div><div class="text-sm">Fix login bug</div><div class="text-xs text-[var(--text-secondary)]">2 hours ago</div></div><div class="text-[var(--color-success)] font-bold">+100 NIM</div></div>
-                            <div class="flex justify-between items-center p-2 rounded-lg bg-white/5"><div><div class="text-sm">Dark mode toggle</div><div class="text-xs text-[var(--text-secondary)]">1 day ago</div></div><div class="text-[var(--color-success)] font-bold">+30 NIM</div></div>
-                            <div class="flex justify-between items-center p-2 rounded-lg bg-white/5"><div><div class="text-sm">Database optimization</div><div class="text-xs text-[var(--text-secondary)]">3 days ago</div></div><div class="text-[var(--color-warning)] font-bold">-80 NIM</div></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ─── PAGE: LEADERBOARD ─── -->
-            <section id="page-leaderboard" class="page">
-                <h1 class="text-2xl lg:text-3xl font-bold mb-6">Leaderboard</h1>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="glass-card p-5">
-                        <h3 class="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-4">Top Developers</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3 p-2 rounded-lg bg-white/5">
-                                <span class="text-sm font-bold text-[var(--text-secondary)] w-6">#1</span>
-                                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-500 to-orange-500 flex items-center justify-center text-white text-xs font-bold">JD</div>
-                                <span class="flex-1 font-medium">John Doe</span>
-                                <span class="text-[var(--color-success)] font-bold font-space">850 NIM</span>
-                            </div>
-                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <span class="text-sm font-bold text-[var(--text-secondary)] w-6">#2</span>
-                                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white text-xs font-bold">AS</div>
-                                <span class="flex-1 font-medium">Alice Smith</span>
-                                <span class="text-[var(--color-success)] font-bold font-space">620 NIM</span>
-                            </div>
-                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <span class="text-sm font-bold text-[var(--text-secondary)] w-6">#3</span>
-                                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center text-white text-xs font-bold">RJ</div>
-                                <span class="flex-1 font-medium">Robert Johnson</span>
-                                <span class="text-[var(--color-success)] font-bold font-space">490 NIM</span>
-                            </div>
-                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <span class="text-sm font-bold text-[var(--text-secondary)] w-6">#4</span>
-                                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-500 to-rose-500 flex items-center justify-center text-white text-xs font-bold">MW</div>
-                                <span class="flex-1 font-medium">Maria Wilson</span>
-                                <span class="text-[var(--color-success)] font-bold font-space">380 NIM</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-5">
-                        <h3 class="text-sm font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-4">Top Organizations</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3 p-2 rounded-lg bg-white/5">
-                                <span class="text-sm font-bold text-[var(--text-secondary)] w-6">#1</span>
-                                <i class="fa-brands fa-github text-xl text-[var(--text-secondary)]"></i>
-                                <span class="flex-1 font-medium">Nimiq Labs</span>
-                                <span class="text-[var(--color-success)] font-bold font-space">2.4k NIM</span>
-                            </div>
-                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <span class="text-sm font-bold text-[var(--text-secondary)] w-6">#2</span>
-                                <i class="fa-brands fa-github text-xl text-[var(--text-secondary)]"></i>
-                                <span class="flex-1 font-medium">OpenSourceDAO</span>
-                                <span class="text-[var(--color-success)] font-bold font-space">1.8k NIM</span>
-                            </div>
-                            <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition">
-                                <span class="text-sm font-bold text-[var(--text-secondary)] w-6">#3</span>
-                                <i class="fa-brands fa-github text-xl text-[var(--text-secondary)]"></i>
-                                <span class="flex-1 font-medium">Web3 Foundation</span>
-                                <span class="text-[var(--color-success)] font-bold font-space">1.2k NIM</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ─── PAGE: ANALYTICS ─── -->
-            <section id="page-analytics" class="page">
-                <h1 class="text-2xl lg:text-3xl font-bold mb-6">Analytics</h1>
-                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div class="glass-card p-4"><div class="text-sm text-[var(--text-secondary)]">Revenue</div><div class="text-xl font-bold font-space">1,240 NIM</div><div class="text-xs text-[var(--color-success)]"><i class="fa-solid fa-arrow-up"></i> +23%</div></div>
-                    <div class="glass-card p-4"><div class="text-sm text-[var(--text-secondary)]">Bounties Created</div><div class="text-xl font-bold font-space">156</div><div class="text-xs text-[var(--color-success)]"><i class="fa-solid fa-arrow-up"></i> +18%</div></div>
-                    <div class="glass-card p-4"><div class="text-sm text-[var(--text-secondary)]">Developer Activity</div><div class="text-xl font-bold font-space">89</div><div class="text-xs text-[var(--color-success)]"><i class="fa-solid fa-arrow-up"></i> +12%</div></div>
-                    <div class="glass-card p-4"><div class="text-sm text-[var(--text-secondary)]">AI Generated</div><div class="text-xl font-bold font-space">67</div><div class="text-xs text-[var(--color-success)]"><i class="fa-solid fa-arrow-up"></i> +34%</div></div>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="glass-card p-5">
-                        <h4 class="text-sm font-medium mb-3">Revenue Trend</h4>
-                        <div class="h-48 flex items-end gap-1">
-                            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-[var(--color-primary)]/60 rounded-t" style="height:20%"></div><div class="text-xs text-[var(--text-secondary)]">Jan</div></div>
-                            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-[var(--color-primary)]/60 rounded-t" style="height:35%"></div><div class="text-xs text-[var(--text-secondary)]">Feb</div></div>
-                            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-[var(--color-primary)]/60 rounded-t" style="height:28%"></div><div class="text-xs text-[var(--text-secondary)]">Mar</div></div>
-                            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-[var(--color-primary)]/60 rounded-t" style="height:55%"></div><div class="text-xs text-[var(--text-secondary)]">Apr</div></div>
-                            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-[var(--color-primary)]/60 rounded-t" style="height:48%"></div><div class="text-xs text-[var(--text-secondary)]">May</div></div>
-                            <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full bg-gradient-to-t from-[var(--color-primary)] to-[var(--color-secondary)] rounded-t" style="height:78%"></div><div class="text-xs text-[var(--text-secondary)]">Jun</div></div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-5">
-                        <h4 class="text-sm font-medium mb-3">Bounty Distribution</h4>
-                        <div class="space-y-2">
-                            <div><div class="flex justify-between text-sm"><span>Easy</span><span>35%</span></div><div class="w-full h-1.5 bg-white/5 rounded-full mt-1 overflow-hidden"><div class="h-full bg-[var(--color-success)] rounded-full" style="width:35%"></div></div></div>
-                            <div><div class="flex justify-between text-sm"><span>Medium</span><span>42%</span></div><div class="w-full h-1.5 bg-white/5 rounded-full mt-1 overflow-hidden"><div class="h-full bg-[var(--color-warning)] rounded-full" style="width:42%"></div></div></div>
-                            <div><div class="flex justify-between text-sm"><span>Hard</span><span>23%</span></div><div class="w-full h-1.5 bg-white/5 rounded-full mt-1 overflow-hidden"><div class="h-full bg-[var(--color-danger)] rounded-full" style="width:23%"></div></div></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ─── PAGE: SETTINGS ─── -->
-            <section id="page-settings" class="page">
-                <h1 class="text-2xl lg:text-3xl font-bold mb-6">Settings</h1>
-                <div class="max-w-2xl space-y-4">
-                    <div class="glass-card p-5">
-                        <h4 class="text-sm font-medium mb-3">Profile</h4>
-                        <div class="space-y-3">
-                            <div><label class="text-sm text-[var(--text-secondary)] block mb-1">Display Name</label><input type="text" value="John Doe" class="w-full bg-white/5 border border-[var(--border-color)] rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[var(--color-primary)]/50 transition" /></div>
-                            <div><label class="text-sm text-[var(--text-secondary)] block mb-1">Email</label><input type="email" value="john@codebounty.ai" class="w-full bg-white/5 border border-[var(--border-color)] rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[var(--color-primary)]/50 transition" /></div>
-                            <button class="btn-primary text-sm">Save Changes</button>
-                        </div>
-                    </div>
-                    <div class="glass-card p-5">
-                        <h4 class="text-sm font-medium mb-3">Notifications</h4>
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between"><span class="text-sm">Email Notifications</span><div class="w-10 h-6 rounded-full bg-[var(--color-primary)] relative cursor-pointer"><div class="w-5 h-5 rounded-full bg-white absolute top-0.5 right-0.5 transition"></div></div></div>
-                            <div class="flex items-center justify-between"><span class="text-sm">Push Notifications</span><div class="w-10 h-6 rounded-full bg-white/10 relative cursor-pointer"><div class="w-5 h-5 rounded-full bg-white absolute top-0.5 left-0.5 transition"></div></div></div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-5 border-red-500/20">
-                        <h4 class="text-sm font-medium text-red-400 mb-3">Danger Zone</h4>
-                        <button class="text-sm text-red-400 border border-red-500/30 px-4 py-2 rounded-full hover:bg-red-500/10 transition">Delete Account</button>
-                    </div>
-                </div>
-            </section>
-
-        </main>
+            <div style="margin-top:1.25rem;padding:0.75rem;background:rgba(124,58,237,0.08);border-radius:var(--radius-sm);border:1px solid rgba(124,58,237,0.15);">
+                <p style="font-size:0.75rem;color:var(--text-secondary);text-align:center;">
+                    <i class="fa-solid fa-flask" style="color:var(--color-primary);"></i>
+                    Demo: <strong style="color:var(--text-primary);">demo@codebounty.ai</strong> / <strong style="color:var(--text-primary);">password123</strong>
+                </p>
+            </div>
+        </div>
     </div>
 
-    <!-- ─── JAVASCRIPT ─── -->
-    <script>
-        // ── Navigation ──
-        const sidebarItems = document.querySelectorAll('.sidebar-item');
-        const pages = {
-            dashboard: document.getElementById('page-dashboard'),
-            repositories: document.getElementById('page-repositories'),
-            'ai-generator': document.getElementById('page-ai-generator'),
-            bounties: document.getElementById('page-bounties'),
-            payments: document.getElementById('page-payments'),
-            wallet: document.getElementById('page-wallet'),
-            leaderboard: document.getElementById('page-leaderboard'),
-            analytics: document.getElementById('page-analytics'),
-            settings: document.getElementById('page-settings'),
-        };
+    <!-- ════════════════════════════════════════ -->
+    <!-- APP (protected)                         -->
+    <!-- ════════════════════════════════════════ -->
+    <div id="app" style="display:none;min-height:100vh;">
+        <!-- Floating Orbs -->
+        <div class="orb" style="width:350px;height:350px;background:var(--color-primary);top:-80px;right:-80px;"></div>
+        <div class="orb" style="width:280px;height:280px;background:var(--color-secondary);bottom:-60px;left:-60px;"></div>
+        <div class="orb" style="width:180px;height:180px;background:#A855F7;top:40%;right:5%;"></div>
 
-        function navigateTo(pageId) {
+        <div style="display:flex;min-height:100vh;position:relative;z-index:1;">
+
+            <!-- ═══ SIDEBAR ═══ -->
+            <aside class="sidebar" id="sidebar">
+                <!-- Brand -->
+                <div class="sidebar-brand">
+                    <div class="brand-icon"><i class="fa-solid fa-code"></i></div>
+                    <span class="brand-text gradient-text">CodeBounty</span>
+                </div>
+
+                <!-- Navigation -->
+                <nav style="flex:1;display:flex;flex-direction:column;gap:0.15rem;">
+                    <button class="sidebar-item active" data-page="dashboard">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <span class="label">Dashboard</span>
+                    </button>
+                    <button class="sidebar-item" data-page="repositories">
+                        <i class="fa-solid fa-repo"></i>
+                        <span class="label">Repositories</span>
+                    </button>
+                    <button class="sidebar-item" data-page="ai-generator">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span class="label">AI Generator</span>
+                    </button>
+                    <button class="sidebar-item" data-page="bounties">
+                        <i class="fa-solid fa-tags"></i>
+                        <span class="label">Bounties</span>
+                    </button>
+                    <button class="sidebar-item" data-page="payments">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span class="label">Payments</span>
+                    </button>
+                    <button class="sidebar-item" data-page="wallet">
+                        <i class="fa-solid fa-wallet"></i>
+                        <span class="label">Wallet</span>
+                    </button>
+                    <button class="sidebar-item" data-page="leaderboard">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span class="label">Leaderboard</span>
+                    </button>
+                    <button class="sidebar-item" data-page="analytics">
+                        <i class="fa-solid fa-chart-bar"></i>
+                        <span class="label">Analytics</span>
+                    </button>
+                    <button class="sidebar-item" data-page="settings">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="label">Settings</span>
+                    </button>
+                </nav>
+
+                <!-- User -->
+                <div class="sidebar-user">
+                    <div class="avatar">JD</div>
+                    <div class="user-info" style="flex:1;">
+                        <div style="font-size:0.8rem;font-weight:600;">John Doe</div>
+                        <div style="font-size:0.65rem;color:var(--text-secondary);">Developer</div>
+                    </div>
+                    <button onclick="handleLogout()" style="background:transparent;border:none;color:var(--text-muted);cursor:pointer;font-size:0.9rem;padding:0.25rem 0.5rem;border-radius:8px;transition:all var(--transition);">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- ═══ MAIN ═══ -->
+            <main class="main-content" id="mainContent">
+
+                <!-- ─── PAGE: DASHBOARD ─── -->
+                <section id="page-dashboard" class="page active">
+                    <!-- Header -->
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;">
+                        <div>
+                            <h1 style="font-size:1.6rem;font-weight:800;">Dashboard</h1>
+                            <p style="color:var(--text-secondary);font-size:0.9rem;margin-top:0.1rem;">Welcome back, John! Here's what's happening.</p>
+                        </div>
+                        <button class="btn-primary" onclick="navigateTo('ai-generator')"><i class="fa-solid fa-plus"></i> New Bounty</button>
+                    </div>
+
+                    <!-- Stats -->
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.5rem;">
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <div style="font-size:0.8rem;color:var(--text-secondary);">Wallet Balance</div>
+                            <div style="font-size:1.8rem;font-weight:700;font-family:'Space Grotesk',monospace;margin-top:0.2rem;">1,250 <span style="font-size:0.9rem;font-weight:400;color:var(--text-secondary);">NIM</span></div>
+                            <div style="font-size:0.7rem;color:var(--color-success);margin-top:0.2rem;"><i class="fa-solid fa-arrow-up"></i> +12.5% this week</div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <div style="font-size:0.8rem;color:var(--text-secondary);">Total Earnings</div>
+                            <div style="font-size:1.8rem;font-weight:700;font-family:'Space Grotesk',monospace;margin-top:0.2rem;">$320.50</div>
+                            <div style="font-size:0.7rem;color:var(--color-success);margin-top:0.2rem;"><i class="fa-solid fa-arrow-up"></i> +8.2% this month</div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <div style="font-size:0.8rem;color:var(--text-secondary);">Open Bounties</div>
+                            <div style="font-size:1.8rem;font-weight:700;font-family:'Space Grotesk',monospace;margin-top:0.2rem;">12</div>
+                            <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:0.2rem;">4 assigned to you</div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <div style="font-size:0.8rem;color:var(--text-secondary);">AI Health Score</div>
+                            <div style="font-size:1.8rem;font-weight:700;font-family:'Space Grotesk',monospace;margin-top:0.2rem;color:var(--color-success);">92%</div>
+                            <div style="font-size:0.7rem;color:var(--text-secondary);margin-top:0.2rem;">Excellent</div>
+                        </div>
+                    </div>
+
+                    <!-- Two columns -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+                        <!-- Recent Activity -->
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <h3 style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.75rem;">Recent Activity</h3>
+                            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                                <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.5rem;border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+                                    <div style="width:32px;height:32px;border-radius:50%;background:rgba(16,185,129,0.2);display:flex;align-items:center;justify-content:center;color:var(--color-success);flex-shrink:0;"><i class="fa-solid fa-check"></i></div>
+                                    <div><div style="font-size:0.85rem;">PR #512 merged — <span style="color:var(--color-success);font-weight:600;">+75 NIM</span></div><div style="font-size:0.7rem;color:var(--text-secondary);">2 hours ago</div></div>
+                                </div>
+                                <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.5rem;border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+                                    <div style="width:32px;height:32px;border-radius:50%;background:rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;color:var(--color-secondary);flex-shrink:0;"><i class="fa-solid fa-code-fork"></i></div>
+                                    <div><div style="font-size:0.85rem;">New PR #514 — <span style="color:var(--color-secondary);">AI Review</span></div><div style="font-size:0.7rem;color:var(--text-secondary);">5 hours ago</div></div>
+                                </div>
+                                <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.5rem;border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+                                    <div style="width:32px;height:32px;border-radius:50%;background:rgba(124,58,237,0.2);display:flex;align-items:center;justify-content:center;color:var(--color-primary);flex-shrink:0;"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                    <div><div style="font-size:0.85rem;">AI generated 3 new bounties</div><div style="font-size:0.7rem;color:var(--text-secondary);">1 day ago</div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Insights -->
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <h3 style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.75rem;">AI Insights</h3>
+                            <div style="display:flex;flex-direction:column;gap:0.6rem;">
+                                <div><div style="display:flex;justify-content:space-between;font-size:0.85rem;"><span>Repository Health</span><span style="color:var(--color-success);">89%</span></div><div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:89%;background:var(--color-success);border-radius:4px;"></div></div></div>
+                                <div><div style="display:flex;justify-content:space-between;font-size:0.85rem;"><span>Technical Debt</span><span style="color:var(--color-warning);">Low</span></div><div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:25%;background:var(--color-warning);border-radius:4px;"></div></div></div>
+                                <div><div style="display:flex;justify-content:space-between;font-size:0.85rem;"><span>Code Quality</span><span style="color:var(--color-success);">94%</span></div><div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:94%;background:var(--color-success);border-radius:4px;"></div></div></div>
+                                <div><div style="display:flex;justify-content:space-between;font-size:0.85rem;"><span>Test Coverage</span><span style="color:var(--color-warning);">72%</span></div><div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:72%;background:var(--color-warning);border-radius:4px;"></div></div></div>
+                            </div>
+                            <div style="margin-top:0.75rem;padding:0.6rem 0.8rem;border-radius:var(--radius-sm);background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.15);font-size:0.75rem;color:var(--text-secondary);display:flex;align-items:center;gap:0.5rem;">
+                                <i class="fa-solid fa-lightbulb" style="color:var(--color-primary);"></i> AI suggests improving test coverage for auth module.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Repositories -->
+                    <div class="glass-card" style="padding:1.2rem 1.5rem;margin-top:1.5rem;">
+                        <h3 style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.75rem;">Repository Overview</h3>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Repository</th><th class="hide-mobile">Language</th><th>Stars</th><th>Forks</th><th class="hide-mobile">Issues</th><th>AI Health</th></tr></thead>
+                                <tbody>
+                                    <tr><td style="font-weight:500;">nimiq-explorer</td><td class="hide-mobile">TypeScript</td><td>1.2k</td><td>89</td><td class="hide-mobile">23</td><td style="color:var(--color-success);">92%</td></tr>
+                                    <tr><td style="font-weight:500;">nimiq-wallet</td><td class="hide-mobile">JavaScript</td><td>856</td><td>64</td><td class="hide-mobile">17</td><td style="color:var(--color-success);">88%</td></tr>
+                                    <tr><td style="font-weight:500;">nimiq-core</td><td class="hide-mobile">Rust</td><td>2.1k</td><td>156</td><td class="hide-mobile">41</td><td style="color:var(--color-warning);">76%</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── PAGE: REPOSITORIES ─── -->
+                <section id="page-repositories" class="page">
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;">
+                        <h1 style="font-size:1.6rem;font-weight:800;">Repositories</h1>
+                        <button class="btn-primary" onclick="showToast('Repository import wizard opened!','info')"><i class="fa-solid fa-plus"></i> Import Repository</button>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;">
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+                                <div><div style="font-weight:600;display:flex;align-items:center;gap:0.4rem;"><i class="fa-brands fa-github" style="color:var(--text-secondary);"></i> nimiq-explorer</div><div style="font-size:0.8rem;color:var(--text-secondary);">nimiq / nimiq-explorer</div></div>
+                                <span class="badge badge-open"><i class="fa-regular fa-circle"></i> Active</span>
+                            </div>
+                            <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.75rem;font-size:0.75rem;color:var(--text-secondary);">
+                                <span><i class="fa-solid fa-circle" style="color:#3178C6;"></i> TypeScript</span>
+                                <span><i class="fa-regular fa-star"></i> 1.2k</span>
+                                <span><i class="fa-regular fa-code-fork"></i> 89</span>
+                            </div>
+                            <div style="margin-top:0.75rem;display:flex;gap:0.5rem;">
+                                <button class="btn-ghost" style="font-size:0.75rem;padding:0.3rem 0.8rem;background:rgba(255,255,255,0.04);border-radius:9999px;" onclick="showToast('Opening repository...','info')">View</button>
+                                <button class="btn-ghost" style="font-size:0.75rem;padding:0.3rem 0.8rem;background:rgba(124,58,237,0.1);color:var(--color-primary);border-radius:9999px;" onclick="navigateTo('ai-generator')">Analyze</button>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+                                <div><div style="font-weight:600;display:flex;align-items:center;gap:0.4rem;"><i class="fa-brands fa-github" style="color:var(--text-secondary);"></i> nimiq-wallet</div><div style="font-size:0.8rem;color:var(--text-secondary);">nimiq / nimiq-wallet</div></div>
+                                <span class="badge badge-inprogress"><i class="fa-regular fa-clock"></i> Analyzing</span>
+                            </div>
+                            <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.75rem;font-size:0.75rem;color:var(--text-secondary);">
+                                <span><i class="fa-solid fa-circle" style="color:#F7DF1E;"></i> JavaScript</span>
+                                <span><i class="fa-regular fa-star"></i> 856</span>
+                                <span><i class="fa-regular fa-code-fork"></i> 64</span>
+                            </div>
+                            <div style="margin-top:0.75rem;display:flex;gap:0.5rem;">
+                                <button class="btn-ghost" style="font-size:0.75rem;padding:0.3rem 0.8rem;background:rgba(255,255,255,0.04);border-radius:9999px;" onclick="showToast('Opening repository...','info')">View</button>
+                                <button class="btn-ghost" style="font-size:0.75rem;padding:0.3rem 0.8rem;background:rgba(124,58,237,0.1);color:var(--color-primary);border-radius:9999px;" onclick="navigateTo('ai-generator')">Analyze</button>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+                                <div><div style="font-weight:600;display:flex;align-items:center;gap:0.4rem;"><i class="fa-brands fa-github" style="color:var(--text-secondary);"></i> nimiq-core</div><div style="font-size:0.8rem;color:var(--text-secondary);">nimiq / nimiq-core</div></div>
+                                <span class="badge badge-review"><i class="fa-regular fa-circle-check"></i> Synced</span>
+                            </div>
+                            <div style="margin-top:0.75rem;display:flex;flex-wrap:wrap;gap:0.75rem;font-size:0.75rem;color:var(--text-secondary);">
+                                <span><i class="fa-solid fa-circle" style="color:#DEA584;"></i> Rust</span>
+                                <span><i class="fa-regular fa-star"></i> 2.1k</span>
+                                <span><i class="fa-regular fa-code-fork"></i> 156</span>
+                            </div>
+                            <div style="margin-top:0.75rem;display:flex;gap:0.5rem;">
+                                <button class="btn-ghost" style="font-size:0.75rem;padding:0.3rem 0.8rem;background:rgba(255,255,255,0.04);border-radius:9999px;" onclick="showToast('Opening repository...','info')">View</button>
+                                <button class="btn-ghost" style="font-size:0.75rem;padding:0.3rem 0.8rem;background:rgba(124,58,237,0.1);color:var(--color-primary);border-radius:9999px;" onclick="navigateTo('ai-generator')">Analyze</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── PAGE: AI GENERATOR ─── -->
+                <section id="page-ai-generator" class="page">
+                    <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:0.25rem;">AI Bounty Generator</h1>
+                    <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.5rem;">Analyze repositories and automatically generate bounties with AI.</p>
+
+                    <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;">
+                        <div class="glass-card" style="padding:1.5rem;">
+                            <div style="display:flex;gap:0.75rem;margin-bottom:1rem;">
+                                <input type="text" placeholder="https://github.com/nimiq/nimiq-explorer" style="flex:1;padding:0.7rem 1rem;background:rgba(255,255,255,0.04);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:'Inter',sans-serif;outline:none;transition:border-color var(--transition);" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'" />
+                                <button class="btn-primary" style="font-size:0.85rem;padding:0.7rem 1.5rem;" onclick="analyzeRepo()"><i class="fa-solid fa-magnifying-glass"></i> Analyze</button>
+                            </div>
+                            <div id="aiScanStatus" style="display:none;padding:0.75rem 1rem;border-radius:var(--radius-sm);background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.15);margin-bottom:1rem;">
+                                <div style="display:flex;align-items:center;gap:0.75rem;">
+                                    <div style="width:32px;height:32px;border-radius:50%;background:rgba(124,58,237,0.2);display:flex;align-items:center;justify-content:center;color:var(--color-primary);"><i class="fa-solid fa-robot"></i></div>
+                                    <div><div style="font-size:0.85rem;font-weight:500;">AI Scan in progress...</div><div style="font-size:0.75rem;color:var(--text-secondary);">Analyzing repository structure and issues</div></div>
+                                    <div style="margin-left:auto;font-size:0.75rem;color:var(--text-secondary);"><span id="scanProgress">45</span>%</div>
+                                </div>
+                                <div style="width:100%;height:3px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:0.5rem;overflow:hidden;"><div id="scanBar" style="height:100%;width:45%;background:linear-gradient(90deg,var(--color-primary),var(--color-secondary));border-radius:4px;transition:width 0.3s ease;"></div></div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
+                                <div class="glass-card-sm" style="padding:0.75rem 1rem;"><div style="font-size:0.75rem;color:var(--text-secondary);">Repository Health</div><div style="font-size:1.1rem;font-weight:700;color:var(--color-success);">89%</div></div>
+                                <div class="glass-card-sm" style="padding:0.75rem 1rem;"><div style="font-size:0.75rem;color:var(--text-secondary);">Technical Debt</div><div style="font-size:1.1rem;font-weight:700;color:var(--color-warning);">Low</div></div>
+                            </div>
+                            <div>
+                                <div style="font-weight:600;font-size:0.9rem;margin-bottom:0.5rem;">Suggested Bounties</div>
+                                <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                                    <div class="glass-card-sm" style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between;">
+                                        <div><div style="font-size:0.85rem;font-weight:500;">Fix authentication bug</div><div style="font-size:0.7rem;color:var(--text-secondary);">Difficulty: Medium · 8 hrs</div></div>
+                                        <div style="text-align:right;"><div style="font-size:0.9rem;font-weight:700;color:var(--color-success);">50 NIM</div><button style="font-size:0.7rem;color:var(--color-primary);background:transparent;border:none;cursor:pointer;text-decoration:underline;" onclick="generateBounty('Fix authentication bug')">Generate</button></div>
+                                    </div>
+                                    <div class="glass-card-sm" style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between;">
+                                        <div><div style="font-size:0.85rem;font-weight:500;">Add dark mode support</div><div style="font-size:0.7rem;color:var(--text-secondary);">Difficulty: Easy · 4 hrs</div></div>
+                                        <div style="text-align:right;"><div style="font-size:0.9rem;font-weight:700;color:var(--color-success);">30 NIM</div><button style="font-size:0.7rem;color:var(--color-primary);background:transparent;border:none;cursor:pointer;text-decoration:underline;" onclick="generateBounty('Add dark mode support')">Generate</button></div>
+                                    </div>
+                                    <div class="glass-card-sm" style="padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between;">
+                                        <div><div style="font-size:0.85rem;font-weight:500;">Optimize database queries</div><div style="font-size:0.7rem;color:var(--text-secondary);">Difficulty: Hard · 12 hrs</div></div>
+                                        <div style="text-align:right;"><div style="font-size:0.9rem;font-weight:700;color:var(--color-success);">80 NIM</div><button style="font-size:0.7rem;color:var(--color-primary);background:transparent;border:none;cursor:pointer;text-decoration:underline;" onclick="generateBounty('Optimize database queries')">Generate</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-primary" style="width:100%;justify-content:center;margin-top:1rem;" onclick="generateAllBounties()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate All Bounties</button>
+                        </div>
+
+                        <div style="display:flex;flex-direction:column;gap:1rem;">
+                            <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                                <h4 style="font-size:0.8rem;font-weight:600;margin-bottom:0.75rem;color:var(--text-secondary);">Quick Stats</h4>
+                                <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.85rem;">
+                                    <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);">Total Issues</span><span>43</span></div>
+                                    <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);">Open Issues</span><span>12</span></div>
+                                    <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);">AI Bounties</span><span>8</span></div>
+                                    <div style="display:flex;justify-content:space-between;"><span style="color:var(--text-secondary);">Total Rewards</span><span style="color:var(--color-success);font-weight:700;">520 NIM</span></div>
+                                </div>
+                            </div>
+                            <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                                <h4 style="font-size:0.8rem;font-weight:600;margin-bottom:0.75rem;color:var(--text-secondary);">AI Recommendations</h4>
+                                <div style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.8rem;color:var(--text-secondary);">
+                                    <div style="display:flex;align-items:flex-start;gap:0.5rem;"><i class="fa-solid fa-circle-check" style="color:var(--color-success);margin-top:0.1rem;"></i> Focus on auth module security</div>
+                                    <div style="display:flex;align-items:flex-start;gap:0.5rem;"><i class="fa-solid fa-circle-check" style="color:var(--color-success);margin-top:0.1rem;"></i> Add unit tests for API</div>
+                                    <div style="display:flex;align-items:flex-start;gap:0.5rem;"><i class="fa-solid fa-circle-check" style="color:var(--color-success);margin-top:0.1rem;"></i> Refactor payment service</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── PAGE: BOUNTIES ─── -->
+                <section id="page-bounties" class="page">
+                    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;">
+                        <h1 style="font-size:1.6rem;font-weight:800;">Bounty Marketplace</h1>
+                        <button class="btn-primary" onclick="navigateTo('ai-generator')"><i class="fa-solid fa-plus"></i> New Bounty</button>
+                    </div>
+                    <div class="glass-card" style="overflow:hidden;padding:0;">
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>Issue</th><th>Repository</th><th>Difficulty</th><th>Reward</th><th class="hide-mobile">Priority</th><th class="hide-mobile">Deadline</th><th>Status</th><th></th></tr></thead>
+                                <tbody>
+                                    <tr><td style="font-weight:500;">Fix login bug</td><td>nimiq-explorer</td><td style="color:var(--color-warning);">Medium</td><td style="color:var(--color-success);font-weight:700;">100 NIM</td><td class="hide-mobile" style="color:var(--color-danger);">High</td><td class="hide-mobile">7 days</td><td><span class="badge badge-open"><i class="fa-regular fa-circle"></i> Open</span></td><td><button class="btn-ghost" style="font-size:0.75rem;padding:0.2rem 0.8rem;background:rgba(124,58,237,0.12);color:var(--color-primary);border-radius:9999px;" onclick="applyBounty(this,'Fix login bug')">Apply</button></td></tr>
+                                    <tr><td style="font-weight:500;">Dark mode toggle</td><td>nimiq-wallet</td><td style="color:var(--color-success);">Easy</td><td style="color:var(--color-success);font-weight:700;">30 NIM</td><td class="hide-mobile" style="color:var(--color-warning);">Medium</td><td class="hide-mobile">5 days</td><td><span class="badge badge-open"><i class="fa-regular fa-circle"></i> Open</span></td><td><button class="btn-ghost" style="font-size:0.75rem;padding:0.2rem 0.8rem;background:rgba(124,58,237,0.12);color:var(--color-primary);border-radius:9999px;" onclick="applyBounty(this,'Dark mode toggle')">Apply</button></td></tr>
+                                    <tr><td style="font-weight:500;">Database optimization</td><td>nimiq-core</td><td style="color:var(--color-danger);">Hard</td><td style="color:var(--color-success);font-weight:700;">80 NIM</td><td class="hide-mobile" style="color:var(--color-danger);">High</td><td class="hide-mobile">10 days</td><td><span class="badge badge-inprogress"><i class="fa-regular fa-clock"></i> In Progress</span></td><td><button class="btn-ghost" style="font-size:0.75rem;padding:0.2rem 0.8rem;color:var(--text-muted);border-radius:9999px;cursor:default;" disabled>Applied</button></td></tr>
+                                    <tr><td style="font-weight:500;">Update README</td><td>nimiq-sdk</td><td style="color:var(--color-success);">Easy</td><td style="color:var(--color-success);font-weight:700;">20 NIM</td><td class="hide-mobile" style="color:var(--text-secondary);">Low</td><td class="hide-mobile">3 days</td><td><span class="badge badge-closed"><i class="fa-regular fa-circle-check"></i> Closed</span></td><td><button class="btn-ghost" style="font-size:0.75rem;padding:0.2rem 0.8rem;color:var(--text-muted);border-radius:9999px;cursor:default;" disabled>Completed</button></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── PAGE: PAYMENTS ─── -->
+                <section id="page-payments" class="page">
+                    <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:1.5rem;">Payments</h1>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.5rem;">
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;"><div style="font-size:0.8rem;color:var(--text-secondary);">Total Paid</div><div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',monospace;">1,240 NIM</div></div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;"><div style="font-size:0.8rem;color:var(--text-secondary);">Pending Escrow</div><div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',monospace;color:var(--color-warning);">320 NIM</div></div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;"><div style="font-size:0.8rem;color:var(--text-secondary);">Transactions</div><div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',monospace;">47</div></div>
+                    </div>
+                    <div class="glass-card" style="overflow:hidden;padding:0;">
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>ID</th><th>Bounty</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+                                <tbody>
+                                    <tr><td style="font-size:0.7rem;font-family:monospace;color:var(--text-secondary);">#TX-001</td><td>Fix login bug</td><td style="color:var(--color-success);font-weight:700;">+100 NIM</td><td><span class="badge badge-paid"><i class="fa-solid fa-check"></i> Completed</span></td><td style="font-size:0.8rem;color:var(--text-secondary);">2 hours ago</td></tr>
+                                    <tr><td style="font-size:0.7rem;font-family:monospace;color:var(--text-secondary);">#TX-002</td><td>Dark mode toggle</td><td style="color:var(--color-success);font-weight:700;">+30 NIM</td><td><span class="badge badge-paid"><i class="fa-solid fa-check"></i> Completed</span></td><td style="font-size:0.8rem;color:var(--text-secondary);">1 day ago</td></tr>
+                                    <tr><td style="font-size:0.7rem;font-family:monospace;color:var(--text-secondary);">#TX-003</td><td>Database optimization</td><td style="color:var(--color-warning);font-weight:700;">-80 NIM</td><td><span class="badge badge-pending"><i class="fa-regular fa-clock"></i> Escrow</span></td><td style="font-size:0.8rem;color:var(--text-secondary);">3 days ago</td></tr>
+                                    <tr><td style="font-size:0.7rem;font-family:monospace;color:var(--text-secondary);">#TX-004</td><td>Security audit</td><td style="color:var(--color-success);font-weight:700;">+120 NIM</td><td><span class="badge badge-paid"><i class="fa-solid fa-check"></i> Completed</span></td><td style="font-size:0.8rem;color:var(--text-secondary);">5 days ago</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── PAGE: WALLET ─── -->
+                <section id="page-wallet" class="page">
+                    <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:1.5rem;">Wallet</h1>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+                        <div class="glass-card" style="padding:1.5rem;">
+                            <div style="font-size:0.8rem;color:var(--text-secondary);">Balance</div>
+                            <div style="font-size:2.5rem;font-weight:700;font-family:'Space Grotesk',monospace;margin-top:0.2rem;">1,250 <span style="font-size:1.2rem;font-weight:400;color:var(--text-secondary);">NIM</span></div>
+                            <div style="font-size:0.9rem;color:var(--text-secondary);">≈ $320.50 USD</div>
+                            <div style="display:flex;gap:0.75rem;margin-top:1rem;">
+                                <button class="btn-primary" style="font-size:0.85rem;padding:0.6rem 1.5rem;" onclick="showToast('Send dialog opened!','info')"><i class="fa-solid fa-arrow-up"></i> Send</button>
+                                <button class="btn-secondary" style="font-size:0.85rem;padding:0.6rem 1.5rem;" onclick="showToast('Receive address copied!','success')"><i class="fa-solid fa-arrow-down"></i> Receive</button>
+                            </div>
+                            <div style="margin-top:1rem;padding:0.75rem 1rem;border-radius:var(--radius-sm);background:rgba(255,255,255,0.03);border:1px solid var(--border-color);">
+                                <div style="font-size:0.7rem;color:var(--text-secondary);">Wallet Address</div>
+                                <div style="font-family:monospace;font-size:0.85rem;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">NQ14 5x6d 7k8j 9n3k 2m4p 8q5r 6t7u 8v9w 0x1y</div>
+                                <button style="font-size:0.7rem;color:var(--color-primary);background:transparent;border:none;cursor:pointer;margin-top:0.2rem;" onclick="copyAddress()">Copy</button>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding:1.5rem;">
+                            <h4 style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.75rem;">Recent Transactions</h4>
+                            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);background:rgba(255,255,255,0.03);"><div><div style="font-size:0.85rem;">Fix login bug</div><div style="font-size:0.7rem;color:var(--text-secondary);">2 hours ago</div></div><div style="color:var(--color-success);font-weight:700;">+100 NIM</div></div>
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);background:rgba(255,255,255,0.03);"><div><div style="font-size:0.85rem;">Dark mode toggle</div><div style="font-size:0.7rem;color:var(--text-secondary);">1 day ago</div></div><div style="color:var(--color-success);font-weight:700;">+30 NIM</div></div>
+                                <div style="display:flex;justify-content:space-between;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);background:rgba(255,255,255,0.03);"><div><div style="font-size:0.85rem;">Database optimization</div><div style="font-size:0.7rem;color:var(--text-secondary);">3 days ago</div></div><div style="color:var(--color-warning);font-weight:700;">-80 NIM</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── PAGE: LEADERBOARD ─── -->
+                <section id="page-leaderboard" class="page">
+                    <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:1.5rem;">Leaderboard</h1>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <h3 style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.75rem;">Top Developers</h3>
+                            <div style="display:flex;flex-direction:column;gap:0.4rem;">
+                                <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);background:rgba(255,255,255,0.03);">
+                                    <span style="font-size:0.8rem;font-weight:700;color:var(--text-secondary);width:24px;">#1</span>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#D97706);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.7rem;">JD</div>
+                                    <span style="flex:1;font-weight:500;">John Doe</span>
+                                    <span style="color:var(--color-success);font-weight:700;font-family:'Space Grotesk',monospace;">850 NIM</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+                                    <span style="font-size:0.8rem;font-weight:700;color:var(--text-secondary);width:24px;">#2</span>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#6366F1);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.7rem;">AS</div>
+                                    <span style="flex:1;font-weight:500;">Alice Smith</span>
+                                    <span style="color:var(--color-success);font-weight:700;font-family:'Space Grotesk',monospace;">620 NIM</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+                                    <span style="font-size:0.8rem;font-weight:700;color:var(--text-secondary);width:24px;">#3</span>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.7rem;">RJ</div>
+                                    <span style="flex:1;font-weight:500;">Robert Johnson</span>
+                                    <span style="color:var(--color-success);font-weight:700;font-family:'Space Grotesk',monospace;">490 NIM</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+                                    <span style="font-size:0.8rem;font-weight:700;color:var(--text-secondary);width:24px;">#4</span>
+                                    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#EC4899,#DB2777);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.7rem;">MW</div>
+                                    <span style="flex:1;font-weight:500;">Maria Wilson</span>
+                                    <span style="color:var(--color-success);font-weight:700;font-family:'Space Grotesk',monospace;">380 NIM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <h3 style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);margin-bottom:0.75rem;">Top Organizations</h3>
+                            <div style="display:flex;flex-direction:column;gap:0.4rem;">
+                                <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);background:rgba(255,255,255,0.03);">
+                                    <span style="font-size:0.8rem;font-weight:700;color:var(--text-secondary);width:24px;">#1</span>
+                                    <i class="fa-brands fa-github" style="font-size:1.2rem;color:var(--text-secondary);width:32px;text-align:center;"></i>
+                                    <span style="flex:1;font-weight:500;">Nimiq Labs</span>
+                                    <span style="color:var(--color-success);font-weight:700;font-family:'Space Grotesk',monospace;">2.4k NIM</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+                                    <span style="font-size:0.8rem;font-weight:700;color:var(--text-secondary);width:24px;">#2</span>
+                                    <i class="fa-brands fa-github" style="font-size:1.2rem;color:var(--text-secondary);width:32px;text-align:center;"></i>
+                                    <span style="flex:1;font-weight:500;">OpenSourceDAO</span>
+                                    <span style="color:var(--color-success);font-weight:700;font-family:'Space Grotesk',monospace;">1.8k NIM</span>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;border-radius:var(--radius-sm);transition:all var(--transition);cursor:pointer;" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background='transparent'">
+                                    <span style="font-size:0.8rem;font-weight:700;color:var(--text-secondary);width:24px;">#3</span>
+                                    <i class="fa-brands fa-github" style="font-size:1.2rem;color:var(--text-secondary);width:32px;text-align:center;"></i>
+                                    <span style="flex:1;font-weight:500;">Web3 Foundation</span>
+                                    <span style="color:var(--color-success);font-weight:700;font-family:'Space Grotesk',monospace;">1.2k NIM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── PAGE: ANALYTICS ─── -->
+                <section id="page-analytics" class="page">
+                    <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:1.5rem;">Analytics</h1>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.5rem;">
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;"><div style="font-size:0.8rem;color:var(--text-secondary);">Revenue</div><div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',monospace;">1,240 NIM</div><div style="font-size:0.7rem;color:var(--color-success);"><i class="fa-solid fa-arrow-up"></i> +23%</div></div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;"><div style="font-size:0.8rem;color:var(--text-secondary);">Bounties Created</div><div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',monospace;">156</div><div style="font-size:0.7rem;color:var(--color-success);"><i class="fa-solid fa-arrow-up"></i> +18%</div></div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;"><div style="font-size:0.8rem;color:var(--text-secondary);">Developer Activity</div><div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',monospace;">89</div><div style="font-size:0.7rem;color:var(--color-success);"><i class="fa-solid fa-arrow-up"></i> +12%</div></div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;"><div style="font-size:0.8rem;color:var(--text-secondary);">AI Generated</div><div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',monospace;">67</div><div style="font-size:0.7rem;color:var(--color-success);"><i class="fa-solid fa-arrow-up"></i> +34%</div></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <h4 style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.75rem;">Revenue Trend</h4>
+                            <div style="height:140px;display:flex;align-items:flex-end;gap:0.5rem;padding-top:0.5rem;">
+                                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.25rem;"><div style="width:100%;background:var(--color-primary);border-radius:4px 4px 0 0;height:20%;opacity:0.6;"></div><div style="font-size:0.6rem;color:var(--text-secondary);">Jan</div></div>
+                                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.25rem;"><div style="width:100%;background:var(--color-primary);border-radius:4px 4px 0 0;height:35%;opacity:0.6;"></div><div style="font-size:0.6rem;color:var(--text-secondary);">Feb</div></div>
+                                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.25rem;"><div style="width:100%;background:var(--color-primary);border-radius:4px 4px 0 0;height:28%;opacity:0.6;"></div><div style="font-size:0.6rem;color:var(--text-secondary);">Mar</div></div>
+                                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.25rem;"><div style="width:100%;background:var(--color-primary);border-radius:4px 4px 0 0;height:55%;opacity:0.6;"></div><div style="font-size:0.6rem;color:var(--text-secondary);">Apr</div></div>
+                                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.25rem;"><div style="width:100%;background:var(--color-primary);border-radius:4px 4px 0 0;height:48%;opacity:0.6;"></div><div style="font-size:0.6rem;color:var(--text-secondary);">May</div></div>
+                                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.25rem;"><div style="width:100%;background:linear-gradient(0deg,var(--color-primary),var(--color-secondary));border-radius:4px 4px 0 0;height:78%;"></div><div style="font-size:0.6rem;color:var(--text-secondary);">Jun</div></div>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <h4 style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.75rem;">Bounty Distribution</h4>
+                            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                                <div><div style="display:flex;justify-content:space-between;font-size:0.85rem;"><span>Easy</span><span>35%</span></div><div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:35%;background:var(--color-success);border-radius:4px;"></div></div></div>
+                                <div><div style="display:flex;justify-content:space-between;font-size:0.85rem;"><span>Medium</span><span>42%</span></div><div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:42%;background:var(--color-warning);border-radius:4px;"></div></div></div>
+                                <div><div style="display:flex;justify-content:space-between;font-size:0.85rem;"><span>Hard</span><span>23%</span></div><div style="width:100%;height:4px;background:rgba(255,255,255,0.06);border-radius:4px;margin-top:2px;overflow:hidden;"><div style="height:100%;width:23%;background:var(--color-danger);border-radius:4px;"></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── PAGE: SETTINGS ─── -->
+                <section id="page-settings" class="page">
+                    <h1 style="font-size:1.6rem;font-weight:800;margin-bottom:1.5rem;">Settings</h1>
+                    <div style="max-width:560px;display:flex;flex-direction:column;gap:1rem;">
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <h4 style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.75rem;">Profile</h4>
+                            <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                                <div><label style="font-size:0.8rem;color:var(--text-secondary);display:block;margin-bottom:0.2rem;">Display Name</label><input type="text" value="John Doe" style="width:100%;padding:0.6rem 0.8rem;background:rgba(255,255,255,0.04);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:'Inter',sans-serif;outline:none;transition:border-color var(--transition);" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'" /></div>
+                                <div><label style="font-size:0.8rem;color:var(--text-secondary);display:block;margin-bottom:0.2rem;">Email</label><input type="email" value="john@codebounty.ai" style="width:100%;padding:0.6rem 0.8rem;background:rgba(255,255,255,0.04);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:'Inter',sans-serif;outline:none;transition:border-color var(--transition);" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='var(--border-color)'" /></div>
+                                <button class="btn-primary" style="font-size:0.85rem;padding:0.6rem 1.5rem;align-self:flex-start;" onclick="showToast('Profile updated successfully!','success')">Save Changes</button>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;">
+                            <h4 style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:0.75rem;">Notifications</h4>
+                            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                                <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:0.85rem;">Email Notifications</span><div class="toggle" style="width:40px;height:24px;border-radius:9999px;background:var(--color-primary);cursor:pointer;position:relative;transition:background var(--transition);" onclick="toggleSwitch(this)"><div style="width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;right:3px;transition:transform var(--transition);"></div></div></div>
+                                <div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:0.85rem;">Push Notifications</span><div class="toggle" style="width:40px;height:24px;border-radius:9999px;background:rgba(255,255,255,0.1);cursor:pointer;position:relative;transition:background var(--transition);" onclick="toggleSwitch(this)"><div style="width:18px;height:18px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:transform var(--transition);"></div></div></div>
+                            </div>
+                        </div>
+                        <div class="glass-card" style="padding:1.2rem 1.5rem;border-color:rgba(239,68,68,0.2);">
+                            <h4 style="font-size:0.8rem;font-weight:600;color:var(--color-danger);margin-bottom:0.75rem;">Danger Zone</h4>
+                            <button class="btn-danger" style="font-size:0.85rem;padding:0.6rem 1.5rem;" onclick="if(confirm('Are you sure you want to delete your account? This cannot be undone.')){showToast('Account deletion requested.','error');}">Delete Account</button>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ─── TOAST CONTAINER ─── -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ════════════════════════════════════════ -->
+    <!-- JAVASCRIPT                              -->
+    <!-- ════════════════════════════════════════ -->
+    <script>
+        // ── AUTH STATE ──
+        let isAuthenticated = false;
+
+        // ── LOGIN ──
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorEl = document.getElementById('loginError');
+
+            // Demo credentials
+            if (email === 'demo@codebounty.ai' && password === 'password123') {
+                errorEl.classList.remove('show');
+                isAuthenticated = true;
+                document.getElementById('login-page').classList.remove('show');
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('app').style.display = 'block';
+                showToast('Welcome back, John! 🎉', 'success');
+                navigateTo('dashboard');
+            } else {
+                errorEl.textContent = '❌ Invalid email or password. Try demo@codebounty.ai / password123';
+                errorEl.classList.add('show');
+            }
+        }
+
+        function socialLogin(provider) {
+            showToast(`🔑 ${provider.charAt(0).toUpperCase() + provider.slice(1)} authentication coming soon!`, 'info');
+        }
+
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                isAuthenticated = false;
+                document.getElementById('app').style.display = 'none';
+                document.getElementById('login-page').style.display = 'flex';
+                document.getElementById('login-page').classList.add('show');
+                showToast('Logged out successfully.', 'info');
+                // Reset login form
+                document.getElementById('loginError').classList.remove('show');
+            }
+        }
+
+        // ── NAVIGATION ──
+        function navigateTo(page) {
             // Hide all pages
-            Object.values(pages).forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 
             // Show target
-            if (pages[pageId]) {
-                pages[pageId].classList.add('active');
+            const target = document.getElementById('page-' + page);
+            if (target) {
+                target.classList.add('active');
+                target.style.animation = 'none';
+                setTimeout(() => { target.style.animation = 'fadeUp 0.4s ease forwards'; }, 10);
             }
 
             // Update sidebar
-            sidebarItems.forEach(item => {
+            document.querySelectorAll('.sidebar-item').forEach(item => {
                 item.classList.remove('active');
-                if (item.dataset.page === pageId) {
+                if (item.dataset.page === page) {
                     item.classList.add('active');
                 }
             });
 
             // Scroll to top
+            const main = document.getElementById('mainContent');
+            if (main) main.scrollTop = 0;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        sidebarItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const page = item.dataset.page;
+        // ── SIDEBAR ITEMS ──
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const page = this.dataset.page;
                 if (page) navigateTo(page);
             });
         });
 
-        // ── Responsive sidebar collapse on mobile ──
-        // Already handled via CSS
+        // ── TOAST SYSTEM ──
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
 
-        // ── Button ripple effect ──
-        document.querySelectorAll('.btn-primary, .btn-secondary, .btn-success').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255,255,255,0.2);
-                        width: 100px;
-                        height: 100px;
-                        transform: translate(-50%, -50%) scale(0);
-                        animation: rippleAnim 0.6s ease-out forwards;
-                        pointer-events: none;
-                    `;
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
+            const icons = {
+                success: 'fa-regular fa-circle-check',
+                error: 'fa-solid fa-circle-exclamation',
+                info: 'fa-solid fa-circle-info',
+            };
 
-        // ── Inject ripple animation ──
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = `
-                @keyframes rippleAnim {
-                    to { transform: translate(-50%, -50%) scale(4); opacity: 0; }
+            toast.innerHTML = `
+                    <span class="toast-icon"><i class="${icons[type] || icons.info}"></i></span>
+                    <span style="flex:1;">${message}</span>
+                    <button class="toast-close" onclick="this.parentElement.remove()">&times;</button>
+                `;
+
+            container.appendChild(toast);
+
+            // Auto-remove after 4 seconds
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateX(20px)';
+                    setTimeout(() => toast.remove(), 300);
                 }
-            `;
-        document.head.appendChild(styleSheet);
+            }, 4000);
+        }
 
-        // ── Handle "Apply" buttons in bounties ──
-        document.querySelectorAll('#page-bounties .table-wrap button').forEach(btn => {
-            if (!btn.disabled && btn.textContent.trim() === 'Apply') {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const row = this.closest('tr');
-                    const issue = row.querySelector('td:first-child')?.textContent || '';
-                    const reward = row.querySelector('td:nth-child(4)')?.textContent || '';
-                    alert(`✅ Applied for "${issue}" - ${reward}`);
-                    this.textContent = 'Applied';
-                    this.disabled = true;
-                    this.className =
-                        'text-xs bg-white/10 text-[var(--text-secondary)] px-3 py-1 rounded-full cursor-not-allowed';
-                });
+        // ── TOGGLE SWITCH ──
+        function toggleSwitch(el) {
+            const isOn = el.style.background === 'rgb(124, 58, 237)' || el.style.background === 'var(--color-primary)';
+            const dot = el.querySelector('div');
+
+            if (isOn) {
+                el.style.background = 'rgba(255,255,255,0.1)';
+                dot.style.left = '3px';
+                dot.style.right = 'auto';
+            } else {
+                el.style.background = 'var(--color-primary)';
+                dot.style.right = '3px';
+                dot.style.left = 'auto';
             }
-        });
+        }
 
-        // ── Handle "Generate" in AI Generator ──
-        document.querySelectorAll('#page-ai-generator .text-\\[var\\(--color-primary\\)\\]').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const parent = this.closest('.flex');
-                const title = parent.querySelector('.font-medium')?.textContent || '';
-                const reward = parent.querySelector('.font-bold')?.textContent || '';
-                alert(`✅ Generated bounty: ${title} - ${reward}`);
+        // ── COPY ADDRESS ──
+        function copyAddress() {
+            const address = 'NQ14 5x6d 7k8j 9n3k 2m4p 8q5r 6t7u 8v9w 0x1y';
+            navigator.clipboard.writeText(address.replace(/\s/g, '')).then(() => {
+                showToast('✅ Address copied to clipboard!', 'success');
+            }).catch(() => {
+                showToast('📋 Address: ' + address, 'info');
             });
-        });
+        }
 
-        // ── Handle "Analyze" button in AI Generator ──
-        document.querySelector('#page-ai-generator .btn-primary .fa-magnifying-glass')?.closest('button')?.addEventListener(
-            'click', function(e) {
-                e.preventDefault();
-                const input = this.closest('.flex')?.querySelector('input');
-                if (input) {
-                    alert(`🔍 Analyzing repository: ${input.value || 'nimiq/nimiq-explorer'}`);
+        // ── APPLY BOUNTY ──
+        function applyBounty(btn, title) {
+            if (btn.disabled) return;
+            btn.textContent = 'Applied';
+            btn.disabled = true;
+            btn.style.background = 'rgba(255,255,255,0.05)';
+            btn.style.color = 'var(--text-muted)';
+            showToast(`✅ Applied for "${title}"!`, 'success');
+        }
+
+        // ── GENERATE BOUNTY ──
+        function generateBounty(title) {
+            showToast(`🤖 Generating bounty: "${title}"...`, 'info');
+            setTimeout(() => {
+                showToast(`✅ Bounty "${title}" generated successfully!`, 'success');
+            }, 1200);
+        }
+
+        // ── GENERATE ALL BOUNTIES ──
+        function generateAllBounties() {
+            showToast('🤖 AI is generating all bounties...', 'info');
+            setTimeout(() => {
+                showToast('✅ All bounties generated! Check the Bounties page.', 'success');
+                setTimeout(() => navigateTo('bounties'), 500);
+            }, 2000);
+        }
+
+        // ── ANALYZE REPO ──
+        function analyzeRepo() {
+            const status = document.getElementById('aiScanStatus');
+            const bar = document.getElementById('scanBar');
+            const progress = document.getElementById('scanProgress');
+
+            status.style.display = 'block';
+            let p = 0;
+            const interval = setInterval(() => {
+                p += Math.floor(Math.random() * 6) + 2;
+                if (p > 100) p = 100;
+                bar.style.width = p + '%';
+                progress.textContent = p;
+                if (p >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        showToast('✅ Repository analysis complete! Found 3 suggested bounties.', 'success');
+                    }, 300);
                 }
-            });
+            }, 200);
+        }
 
-        // ── Handle "Generate All Bounties" ──
-        document.querySelector('#page-ai-generator .btn-primary .fa-wand-magic-sparkles')?.closest('button')?.addEventListener(
-            'click', function(e) {
-                e.preventDefault();
-                alert('🤖 AI is generating bounties for all suggested issues...');
-            });
-
-        // ── Handle wallet copy ──
-        document.querySelector('#page-wallet .text-\\[var\\(--color-primary\\)\\]')?.addEventListener('click', function(e) {
-            const address = this.closest('.p-3')?.querySelector('.font-mono')?.textContent || '';
-            if (address) {
-                navigator.clipboard.writeText(address.trim()).then(() => {
-                    const original = this.textContent;
-                    this.textContent = '✅ Copied!';
-                    setTimeout(() => { this.textContent = original; }, 2000);
-                });
-            }
-        });
-
-        // ── Handle toggle switches in settings ──
-        document.querySelectorAll('#page-settings .relative.cursor-pointer').forEach(toggle => {
-            toggle.addEventListener('click', function() {
-                const isOn = this.classList.contains('bg-[var(--color-primary)]');
-                if (isOn) {
-                    this.classList.remove('bg-[var(--color-primary)]');
-                    this.classList.add('bg-white/10');
-                    const dot = this.querySelector('.absolute');
-                    if (dot) {
-                        dot.classList.remove('right-0.5');
-                        dot.classList.add('left-0.5');
-                    }
-                } else {
-                    this.classList.add('bg-[var(--color-primary)]');
-                    this.classList.remove('bg-white/10');
-                    const dot = this.querySelector('.absolute');
-                    if (dot) {
-                        dot.classList.remove('left-0.5');
-                        dot.classList.add('right-0.5');
-                    }
-                }
-            });
-        });
-
-        // ── Console branding ──
-        console.log('%c🚀 CodeBounty AI', 'font-size:24px;font-weight:800;color:#7C3AED;');
-        console.log('%cAI-Powered Open Source Collaboration Platform', 'font-size:14px;color:#94A3B8;');
-        console.log('%cBuilt with ❤️ using Next.js, Tailwind, and Nimiq Pay', 'font-size:12px;color:#94A3B8;');
-
-        // ── Keyboard shortcuts ──
+        // ── KEYBOARD SHORTCUTS ──
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey || e.metaKey) {
                 const map = {
@@ -1155,10 +1625,32 @@
                     navigateTo(map[e.key]);
                 }
             }
+            if (e.key === 'Escape') {
+                // Close any open modals / toasts
+            }
         });
 
-        // Show tooltip for keyboard shortcuts on hover
+        // ── CONSOLE BRANDING ──
+        console.log('%c🚀 CodeBounty AI', 'font-size:24px;font-weight:800;color:#7C3AED;');
+        console.log('%cAI-Powered Open Source Collaboration Platform', 'font-size:14px;color:#94A3B8;');
+        console.log('%cBuilt with ❤️ using Next.js, Tailwind, and Nimiq Pay', 'font-size:12px;color:#94A3B8;');
         console.log('⌨️ Keyboard shortcuts: Ctrl+1-9 to navigate');
+
+        // ── HOVER SIDEBAR EXPAND (desktop) ──
+        const sidebar = document.getElementById('sidebar');
+        if (window.innerWidth > 992) {
+            sidebar.addEventListener('mouseenter', () => {
+                sidebar.classList.add('sidebar-expanded');
+            });
+            sidebar.addEventListener('mouseleave', () => {
+                sidebar.classList.remove('sidebar-expanded');
+            });
+        }
+
+        // ── Demo auto-login hint ──
+        if (!isAuthenticated) {
+            console.log('💡 Use demo@codebounty.ai / password123 to login');
+        }
     </script>
 
 </body>
